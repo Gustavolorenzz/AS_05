@@ -51,9 +51,9 @@ st.sidebar.info("💡 Usando o modelo gratuito Gemini 1.5 Flash")
 # Load API key from .env.example file
 
 # Try to load API key from .env.example file
-api_key = os.environ.get('GOOGLE_API_KEY')
+api_key = os.environ.get('API_KEY_GOOGLE')
 env_api_key = None
-if 'GOOGLE_API_KEY' not in os.environ:
+if not api_key:
     if os.path.exists('.env.example'):
         load_dotenv('.env.example')
         env_api_key = os.getenv('GOOGLE_API_KEY')
