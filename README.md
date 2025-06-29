@@ -1,2 +1,6 @@
-# AS_05
-
+## "📝 Para usar a aplicação:"
+Obtenha sua API Key do Google Gemini em: https://makersuite.google.com/app/apikey"
+Execute: streamlit run app.py"
+Configure a API Key na interface web"
+Carregue seus arquivos PDF"
+Comece a fazer perguntas!"
