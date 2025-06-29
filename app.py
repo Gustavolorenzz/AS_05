@@ -5,6 +5,8 @@ from typing import List
 from tools import PDFProcessor, VectorStore, SimpleVectorStore, GeminiChat, format_context_from_results
 from dotenv import load_dotenv
 
+API_KEY = os.environ.get('GOOGLE_API_KEY')
+
 # Configuração da página
 st.set_page_config(
     page_title="Assistente Conversacional PDF",
@@ -49,21 +51,23 @@ st.sidebar.info("💡 Usando o modelo gratuito Gemini 1.5 Flash")
 # Load API key from .env.example file
 
 # Try to load API key from .env.example file
+api_key = os.environ.get('GOOGLE_API_KEY')
 env_api_key = None
-if os.path.exists('.env.example'):
-    load_dotenv('.env.example')
-    env_api_key = os.getenv('GOOGLE_API_KEY')
+if 'GOOGLE_API_KEY' not in os.environ:
+    if os.path.exists('.env.example'):
+        load_dotenv('.env.example')
+        env_api_key = os.getenv('GOOGLE_API_KEY')
 
-# Use the API key from the file or fall back to text input
-if env_api_key:
-    st.sidebar.success("✅ API Key carregada do arquivo .env.example")
-    api_key = env_api_key
-else:
-    api_key = st.sidebar.text_input(
-        "Digite sua API Key do Google Gemini:",
-        type="password",
-        help="Obtenha sua API key GRATUITA em: https://makersuite.google.com/app/apikey"
-    )
+    # Use the API key from the file or fall back to text input
+    if env_api_key:
+        st.sidebar.success("✅ API Key carregada do arquivo .env.example")
+        api_key = env_api_key
+    else:
+        api_key = st.sidebar.text_input(
+            "Digite sua API Key do Google Gemini:",
+            type="password",
+            help="Obtenha sua API key GRATUITA em: https://makersuite.google.com/app/apikey"
+        )
 
 if api_key:
     try:
