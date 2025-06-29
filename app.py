@@ -42,6 +42,7 @@ st.title("AS05")
 st.markdown("### Faça perguntas sobre seus documentos PDF usando IA")
 
 # Sidebar
+st.sidebar.markdown("### [🔗 Link para o repositório](https://drive.google.com/drive/folders/10tXY6ERto4np60fJPjb30YfEuTxqq8WW?usp=sharing)")
 st.sidebar.title("⚙️ Configurações")
 st.sidebar.markdown("---")
 
