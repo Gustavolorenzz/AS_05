@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import tempfile
 from typing import List
-from tools import PDFProcessor, VectorStore, GeminiChat, format_context_from_results
+from tools import PDFProcessor, VectorStore, SimpleVectorStore, GeminiChat, format_context_from_results
 from dotenv import load_dotenv
 
 # Configuração da página
@@ -15,7 +15,17 @@ st.set_page_config(
 
 # Inicializar session state
 if 'vector_store' not in st.session_state:
-    st.session_state.vector_store = VectorStore()
+    try:
+        st.session_state.vector_store = VectorStore()
+        st.sidebar.success("🔬 Sistema de embeddings avançado carregado")
+    except Exception as e:
+        st.sidebar.warning("⚠️ Usando sistema de busca simplificado devido a limitações do ambiente")
+        try:
+            st.session_state.vector_store = SimpleVectorStore()
+        except Exception as e2:
+            st.error(f"Erro crítico ao inicializar o sistema: {str(e2)}")
+            st.stop()
+        
 if 'pdf_processor' not in st.session_state:
     st.session_state.pdf_processor = PDFProcessor()
 if 'chat_history' not in st.session_state:
