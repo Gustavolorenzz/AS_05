@@ -4,3 +4,4 @@ PyPDF2
 faiss-cpu
 scikit-learn
 numpy
+dotenv
